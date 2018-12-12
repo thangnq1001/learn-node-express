@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controller/user.controller');
+const jwtVerify = require('../middleware/jwt-verify');
 
 router.post('/', userController.createUser);
-router.get('/', userController.findAllUsers);
+router.get('/', jwtVerify, userController.findAllUsers);
 router.get('/:id', userController.findUserById);
 router.delete('/:id', userController.deleteUserById);
 router.patch('/:id', userController.patchUser);

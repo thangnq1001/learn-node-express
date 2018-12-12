@@ -1,2 +1,1 @@
-This is a simple nodejs app
-Thang Ngo
+This is a nodejs app

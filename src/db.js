@@ -1,3 +1,3 @@
 const mongoose = require('mongoose');
-const envConfig = require('./environment/config');
-mongoose.connect(envConfig.database.path, { useNewUrlParser: true } );
+const config = require('./config');
+mongoose.connect(config.database.path, { useNewUrlParser: true } );

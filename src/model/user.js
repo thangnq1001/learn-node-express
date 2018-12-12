@@ -1,20 +1,38 @@
 const mongoose = require('mongoose');
+const schemaType = mongoose.Schema.Types;
 const timestamp = require('mongoose-timestamp');
 const MODEL_NAME = 'User';
 const COLLECTION_NAME = 'user';
 
 const UserSchema = new mongoose.Schema({
+    username: {
+        type: schemaType.String
+    },
+    password: {
+        type: schemaType.String
+    },
     email: {
-        type: String
+        type: schemaType.String
     },
     firstName: {
-        type: String
+        type: schemaType.String
     },
     lastName: {
-        type: String
+        type: schemaType.String
     },
     phoneNumber: {
-        type: String
+        type: schemaType.String
+    },
+    role: {
+        type: schemaType.String
+    },
+    managerId: {
+        type: schemaType.ObjectId,
+        ref: MODEL_NAME
+    },
+    isActive: {
+        type: schemaType.Number,
+        default: 1
     }
 });
 

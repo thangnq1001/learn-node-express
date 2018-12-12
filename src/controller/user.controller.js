@@ -1,7 +1,9 @@
 const User = require('../model/user');
 const httpStatus = require('http-status');
+const bcrypt = require('bcrypt');
 
 module.exports.createUser = (req, res) => {
+    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(8));
     User.create(req.body, (err, savedUser) => {
         if (err) {
             return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err);
@@ -15,7 +17,11 @@ module.exports.findAllUsers = (req, res) => {
         if (err) {
             return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err);
         }
-        res.status(httpStatus.OK).send(foundUsers);
+        res.status(httpStatus.OK).send(foundUsers.map(user => {
+            user = user.toObject();
+            delete user.password;
+            return user;
+        }));
     })
 };
 
